@@ -1,9 +1,11 @@
 package ru.kpfu.itis.ibragimovaidar.config;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ru.kpfu.itis.ibragimovaidar.entities.GameEntity;
 import ru.kpfu.itis.ibragimovaidar.entities.Planet;
 import ru.kpfu.itis.ibragimovaidar.entities.Spaceship;
+import ru.kpfu.itis.ibragimovaidar.entities.Tower;
 import ru.kpfu.itis.ibragimovaidar.util.AssetsUtil;
 
 import java.util.ArrayList;
@@ -18,8 +20,12 @@ public class Config {
 		List<GameEntity> gameEntities = new ArrayList<>();
 		gameEntities.add(PLANET);
 
-		Spaceship tankShip = new Spaceship(100, 100, AssetsUtil.getPath("/img/tankShip.png"), 32, 32, 100);
+		Spaceship tankShip = new Spaceship(100, 100, AssetsUtil.getPath("/img/tankShip.png"), 128, 128, 100, 30, 100);
 		gameEntities.add(tankShip);
+		Spaceship tankShip2 = new Spaceship(800, 800, AssetsUtil.getPath("/img/tankShip.png"), 128, 128, 100, 30, 100);
+		gameEntities.add(tankShip2);
+		Spaceship pusher = new Spaceship(100, 500, AssetsUtil.getPath("/img/Pusher.png"), 128, 128, 100, 50, 100);
+		gameEntities.add(pusher);
 		return gameEntities;
 	};
 
@@ -31,7 +37,10 @@ public class Config {
 		return gameEntitiesSupplier;
 	}
 
-	public static Image getBackgroundImage(){
-		return new Image(AssetsUtil.getInputStream("/img/vortex.png"));
+	public static ImageView getBackgroundImage(){
+		ImageView imageView = new ImageView(new Image(AssetsUtil.getInputStream("/img/space.png")));
+		imageView.setTranslateX(0);
+		imageView.setTranslateY(0);
+		return imageView;
 	}
 }
