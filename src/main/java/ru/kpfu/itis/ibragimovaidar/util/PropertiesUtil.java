@@ -1,8 +1,11 @@
 package ru.kpfu.itis.ibragimovaidar.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.Properties;
 
+@Slf4j
 public final class PropertiesUtil {
 
 	private static final Properties PROPERTIES;
@@ -21,14 +24,25 @@ public final class PropertiesUtil {
 		if (property != null){
 			return property;
 		}
+		log.error("Property {} does not exist", key);
 		throw new PropertiesUtilException("Property " + key + "does not exists");
 	}
 
 	public static int getIntProperty(String key){
 		try {
-			return Integer.parseInt(PROPERTIES.getProperty(key));
+			return Integer.parseInt(getProperty(key));
 		} catch (NumberFormatException e) {
+			log.error("Property {} can not be converted to int ", key);
 			throw new PropertiesUtilException("Property \"" + key + "\" can not be converted to int" , e);
+		}
+	}
+
+	public static double getDoubleProperty(String key){
+		try {
+			return Double.parseDouble(getProperty(key));
+		} catch (NumberFormatException e) {
+			log.error("Property {} can not be converted to double ", key);
+			throw new PropertiesUtilException("Property \"" + key + "\" can not be converted to double " , e);
 		}
 	}
 
