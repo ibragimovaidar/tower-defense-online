@@ -1,47 +1,71 @@
 package ru.kpfu.itis.ibragimovaidar.entities;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.nio.file.Path;
 
+@Getter
+@Setter
 public abstract class LifeEntity extends GameEntity {
 
 	protected int health;
 	protected int maxHealth;
+	private Rectangle maxHealthBarStrokeRectangle;
+	private Rectangle currentHealthBarRectangle;
 
-	public LifeEntity(int x, int y, Path imagePath, int width, int height) {
-		super(x, y, imagePath, width, height);
+	protected LifeEntity(int x, int y, int width, int height, int maxHealth){
+		super(x, y, width, height);
+		this.maxHealth = maxHealth;
+		this.health = maxHealth;
+		initHealthBar();
+	}
+
+	protected LifeEntity(int x, int y, int width, int height, int maxHealth, Image image){
+		super(x, y, width, height, image);
+		this.maxHealth = maxHealth;
+		this.health = maxHealth;
+		initHealthBar();
 	}
 
 	public LifeEntity(int x, int y, Path imagePath, int width, int height, int maxHealth){
 		super(x, y, imagePath, width, height);
 		this.maxHealth = maxHealth;
 		this.health = maxHealth;
+		initHealthBar();
 	}
 
-	public int getHealth() {
-		return health;
+	private void initHealthBar(){
+		maxHealthBarStrokeRectangle = new Rectangle(width, 10, Color.TRANSPARENT);
+		maxHealthBarStrokeRectangle.setStroke(Color.RED);
+		maxHealthBarStrokeRectangle.setTranslateX(x);
+		maxHealthBarStrokeRectangle.setTranslateY(y - 20);
+
+		currentHealthBarRectangle = new Rectangle((double) width * ((double) health / (double) maxHealth), 10, Color.GREEN);
+		currentHealthBarRectangle.setTranslateX(x);
+		currentHealthBarRectangle.setTranslateY(y - 20);
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
+	protected void drawHealthBar(Pane rootPane){
+		rootPane.getChildren().add(maxHealthBarStrokeRectangle);
+		rootPane.getChildren().add(currentHealthBarRectangle);
 	}
 
-	public int getMaxHealth() {
-		return maxHealth;
+	protected void updateHealthBar(Pane rootPane){
+		maxHealthBarStrokeRectangle.setTranslateX(x);
+		maxHealthBarStrokeRectangle.setTranslateY(y - 20);
+
+		currentHealthBarRectangle.setTranslateX(x);
+		currentHealthBarRectangle.setTranslateY(y - 20);
+		currentHealthBarRectangle.setWidth((double) width * ((double) health / (double)maxHealth));
 	}
 
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
-	}
-
-	protected void drawHealthBar(GraphicsContext context){
-		context.setStroke(Color.RED);
-		context.strokeRect(x, y - 20, width, 10);
-		context.setFill(Color.RED);
-		context.setFill(Color.GREEN);
-		context.fillRect(x, y - 20, width * (health / maxHealth), 10);
-		context.strokeText(String.valueOf(health), x + width / 2, y - 10);
+	public void removeHealthBar(Pane rootPane){
+		rootPane.getChildren().remove(currentHealthBarRectangle);
+		rootPane.getChildren().remove(maxHealthBarStrokeRectangle);
 	}
 }

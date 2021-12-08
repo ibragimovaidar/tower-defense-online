@@ -1,6 +1,6 @@
 package ru.kpfu.itis.ibragimovaidar.entities;
 
-import ru.kpfu.itis.ibragimovaidar.game.GameContextHolder;
+import ru.kpfu.itis.ibragimovaidar.game.context.GameInstanceContextHolder;
 
 import java.nio.file.Path;
 
@@ -11,12 +11,17 @@ public class Planet extends LifeEntity {
 	}
 
 	@Override
-	public void render(GameContextHolder context) {
-		context.getGraphicsContext().drawImage(imageView.getImage(), x, y);
-		drawHealthBar(context.getGraphicsContext());
+	public void render(GameInstanceContextHolder context) {
+		context.getRootPane().getChildren().add(imageView);
+		imageView.setTranslateX(x);
+		imageView.setTranslateY(y);
+		drawHealthBar(context.getRootPane());
 	}
 
 	@Override
-	public void updateState(GameContextHolder context, double diff) {
+	public void updateState(GameInstanceContextHolder context, double diff) {
+		imageView.setTranslateX(x);
+		imageView.setTranslateY(y);
+		updateHealthBar(context.getRootPane());
 	}
 }
