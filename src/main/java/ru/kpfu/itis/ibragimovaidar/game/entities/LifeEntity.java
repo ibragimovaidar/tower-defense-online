@@ -1,4 +1,4 @@
-package ru.kpfu.itis.ibragimovaidar.entities;
+package ru.kpfu.itis.ibragimovaidar.game.entities;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;

@@ -1,9 +1,12 @@
-package ru.kpfu.itis.ibragimovaidar.entities;
+package ru.kpfu.itis.ibragimovaidar.game.entities;
 
+import javafx.scene.image.Image;
+import lombok.Getter;
+import lombok.Setter;
 import ru.kpfu.itis.ibragimovaidar.game.context.GameInstanceContextHolder;
 
-import java.nio.file.Path;
-
+@Getter
+@Setter
 public class Spaceship extends LifeEntity {
 
 	protected int speed;
@@ -11,8 +14,8 @@ public class Spaceship extends LifeEntity {
 
 	protected double angle = 0;
 
-	public Spaceship(int x, int y, Path imagePath, int width, int height, int maxHealth, int speed, int damage) {
-		super(x, y, imagePath, width, height, maxHealth);
+	public Spaceship(int x, int y, int width, int height, int maxHealth, int speed, int damage, Image image) {
+		super(x, y, width, height, maxHealth, image);
 		this.speed = speed;
 		this.damage = damage;
 	}
@@ -58,21 +61,5 @@ public class Spaceship extends LifeEntity {
 		}
 
 		updateHealthBar(context.getRootPane());
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-
-	public int getDamage() {
-		return damage;
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
 	}
 }
