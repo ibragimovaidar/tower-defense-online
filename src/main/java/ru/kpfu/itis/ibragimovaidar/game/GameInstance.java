@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import ru.kpfu.itis.ibragimovaidar.game.context.GameInstanceContextHolder;
+import ru.kpfu.itis.ibragimovaidar.game.context.PlayerState;
 import ru.kpfu.itis.ibragimovaidar.game.handler.EventHandlerRegisterer;
 import ru.kpfu.itis.ibragimovaidar.game.render.GameEntityRenderer;
 import ru.kpfu.itis.ibragimovaidar.game.render.GameGUIRenderer;
@@ -34,11 +35,11 @@ public class GameInstance {
 
 	private void onTimerTick(ActionEvent actionEvent) {
 		entityRenderer.onTimerTick(actionEvent);
-
+		guiRenderer.onTimerTick(actionEvent);
 	}
 
 	public GameInstance(Pane rootPane) {
-		gameContextHolder = new GameInstanceContextHolder(rootPane, getPlanet(), getGameEntitiesSupplier(), getBackgroundImage());
+		gameContextHolder = new GameInstanceContextHolder(rootPane, getPlanet(), getGameEntitiesSupplier(), getBackgroundImage(), new PlayerState("Aidar", 1000), new PlayerState("Enemy", 1000));
 		entityRenderer = new GameEntityRenderer(gameContextHolder, new StateUpdater());
 		guiRenderer = new GameGUIRenderer(gameContextHolder, new StateUpdater());
 		eventHandlerRegisterer = new EventHandlerRegisterer(gameContextHolder, entityRenderer);

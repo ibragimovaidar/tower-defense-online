@@ -36,11 +36,10 @@ public class Tower extends LifeEntity {
 		context.getRootPane().getChildren().add(imageView);
 		imageView.setTranslateX(x);
 		imageView.setTranslateY(y);
-
 		attackRangeEllipse = new Ellipse(x + width / 2, y + height / 2, attackRadius, attackRadius);
 		attackRangeEllipse.setFill(Color.TRANSPARENT);
 		attackRangeEllipse.setStroke(Color.YELLOW);
-		context.getRootPane().getChildren().add(attackRangeEllipse);
+		//context.getRootPane().getChildren().add(attackRangeEllipse);
 	}
 
 	@Override

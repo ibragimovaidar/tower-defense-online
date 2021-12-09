@@ -20,9 +20,10 @@ public class TowerDefenseOnlineApp extends Application {
 		root = new Pane();
 		root.setPrefSize(856, 856);
 		root.getChildren().add(Config.getBackgroundImage());
+
 		GameInstance gameInstance = new GameInstance(root);
 
-		Scene scene = new Scene(root, 856, 856);
+		Scene scene = new Scene(root, 1024, 856);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

@@ -13,8 +13,19 @@
         </encoder>
     </appender>
 
+    <appender name="eventHandlerLogAppender" class="ch.qos.logback.core.FileAppender">
+        <file>eventHandlerLogs.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+        </encoder>
+    </appender>
+
     <logger name="ru.kpfu.itis.ibragimovaidar" level="debug" additivity="false">
         <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="ru.kpfu.itis.ibragimovaidar.game.handler" level="debug" additivity="false">
+        <appender-ref ref="eventHandlerLogAppender"/>
     </logger>
 
     <root level="debug">

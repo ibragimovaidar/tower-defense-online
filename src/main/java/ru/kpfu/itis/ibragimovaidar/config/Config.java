@@ -2,10 +2,7 @@ package ru.kpfu.itis.ibragimovaidar.config;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import ru.kpfu.itis.ibragimovaidar.entities.GameEntity;
-import ru.kpfu.itis.ibragimovaidar.entities.Planet;
-import ru.kpfu.itis.ibragimovaidar.entities.Spaceship;
-import ru.kpfu.itis.ibragimovaidar.entities.Tower;
+import ru.kpfu.itis.ibragimovaidar.game.entities.*;
 import ru.kpfu.itis.ibragimovaidar.util.AssetsUtil;
 
 import java.util.ArrayList;
@@ -20,12 +17,11 @@ public class Config {
 		List<GameEntity> gameEntities = new ArrayList<>();
 		gameEntities.add(PLANET);
 
-		Spaceship tankShip = new Spaceship(100, 100, AssetsUtil.getPath("/img/tankShip.png"), 128, 128, 100, 30, 100);
-		gameEntities.add(tankShip);
-		Spaceship tankShip2 = new Spaceship(800, 800, AssetsUtil.getPath("/img/tankShip.png"), 128, 128, 100, 30, 100);
-		gameEntities.add(tankShip2);
-		Spaceship pusher = new Spaceship(100, 500, AssetsUtil.getPath("/img/Pusher.png"), 128, 128, 100, 50, 100);
-		gameEntities.add(pusher);
+		SpaceshipFactory spaceshipFactory = new SpaceshipFactory();
+		gameEntities.add(spaceshipFactory.createSpaceship(SpaceshipFactory.SpaceshipType.TANK, 100, 200));
+		gameEntities.add(spaceshipFactory.createSpaceship(SpaceshipFactory.SpaceshipType.PUSHER, 100, 200));
+		gameEntities.add(spaceshipFactory.createSpaceship(SpaceshipFactory.SpaceshipType.PUSHER, 300, 200));
+		gameEntities.add(Tower.createInstance(300, 300));
 		return gameEntities;
 	};
 

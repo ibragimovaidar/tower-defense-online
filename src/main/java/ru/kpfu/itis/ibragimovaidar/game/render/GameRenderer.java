@@ -2,7 +2,7 @@ package ru.kpfu.itis.ibragimovaidar.game.render;
 
 import javafx.event.ActionEvent;
 import lombok.RequiredArgsConstructor;
-import ru.kpfu.itis.ibragimovaidar.entities.GameEntity;
+import ru.kpfu.itis.ibragimovaidar.game.entities.GameEntity;
 import ru.kpfu.itis.ibragimovaidar.game.context.GameInstanceContextHolder;
 import ru.kpfu.itis.ibragimovaidar.game.state.StateUpdater;
 
