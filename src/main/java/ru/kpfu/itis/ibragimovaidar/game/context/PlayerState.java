@@ -7,9 +7,10 @@ import lombok.Setter;
 @Setter
 public class PlayerState {
 
+	private int id;
 	private String username;
 	private int health;
-	private int money;
+	private int money = 100;
 
 	public PlayerState(String username, int health) {
 		this.health = health;

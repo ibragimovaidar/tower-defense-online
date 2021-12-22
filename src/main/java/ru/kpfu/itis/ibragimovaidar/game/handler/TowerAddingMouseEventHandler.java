@@ -17,8 +17,11 @@ public class TowerAddingMouseEventHandler implements EventHandler<MouseEvent> {
 
 	@Override
 	public void handle(MouseEvent event) {
-		Tower tower = Tower.createInstance((int) event.getX(), (int) event.getY());
-		context.getGameEntities().add(tower);
-		gameEntityRenderer.renderSingleEntity(tower);
+		if (context.getPlayerState().getMoney() >= 50){
+			context.getPlayerState().setMoney(context.getPlayerState().getMoney() - 50);
+
+			Tower tower = Tower.createInstance((int) event.getX(), (int) event.getY());
+			gameEntityRenderer.renderSingleEntity(tower);
+		}
 	}
 }

@@ -17,9 +17,8 @@ public class GameGUIRenderer extends GameRenderer {
 
 	private Text currentMoneyText;
 
-	// private final Text playerUsernameText;
-	// private final Text enemyUsernameText;
-	private Rectangle backgroundPanel;
+	private Text playerUsernameText;
+	private Text enemyUsernameText;
 	private Rectangle playerMaxLifeHealthBar;
 	private Rectangle enemyMaxLifeHealthBar;
 	private Rectangle playerHealthBar;
@@ -27,7 +26,6 @@ public class GameGUIRenderer extends GameRenderer {
 
 	public GameGUIRenderer(GameInstanceContextHolder context, StateUpdater stateUpdater) {
 		super(context, stateUpdater);
-		initBackground(context);
 		initText();
 		initHealthBar(context);
 	}
@@ -35,11 +33,12 @@ public class GameGUIRenderer extends GameRenderer {
 	@Override
 	public void renderContextEntities(GameInstanceContextHolder context) {
 		context.getRootPane().getChildren().add(currentMoneyText);
+		context.getRootPane().getChildren().add(playerUsernameText);
 		context.getRootPane().getChildren().add(playerHealthBar);
 		context.getRootPane().getChildren().add(playerMaxLifeHealthBar);
 		context.getRootPane().getChildren().add(enemyHealthBar);
 		context.getRootPane().getChildren().add(enemyMaxLifeHealthBar);
-		context.getRootPane().getChildren().add(backgroundPanel);
+		context.getRootPane().getChildren().add(enemyUsernameText);
 	}
 
 	@Override
@@ -54,29 +53,38 @@ public class GameGUIRenderer extends GameRenderer {
 		enemyHealthBar.setWidth((double) 100 * ((double) context.getEnemyState().getHealth() / (double) context.getPlanet().getMaxHealth()));
 	}
 
-	private void initBackground(GameInstanceContextHolder context){
-		backgroundPanel = new Rectangle(856, 0, 168, 856);
-		backgroundPanel.setFill(Color.DARKBLUE);
-	}
-
 	private void initHealthBar(GameInstanceContextHolder context){
-		playerMaxLifeHealthBar = new Rectangle(100, 10, Color.TRANSPARENT);
+		// player health bar
+		playerUsernameText = new Text(context.getPlayerState().getUsername());
+		playerUsernameText.setX(900);
+		playerUsernameText.setY(190);
+		playerUsernameText.setFill(Color.GOLDENROD);
+		playerUsernameText.setFont((Font.font(null, FontWeight.BOLD, 30)));
+
+		playerMaxLifeHealthBar = new Rectangle(100, 30, Color.TRANSPARENT);
 		playerMaxLifeHealthBar.setStroke(Color.GREY);
 		playerMaxLifeHealthBar.setTranslateX(900);
 		playerMaxLifeHealthBar.setTranslateY(200);
 
-		playerHealthBar = new Rectangle((double) 100 * ((double) context.getPlanet().getHealth() / (double) context.getPlanet().getMaxHealth()), 10, Color.LIGHTGREEN);
+		playerHealthBar = new Rectangle((double) 100 * ((double) context.getPlanet().getHealth() / (double) context.getPlanet().getMaxHealth()), 30, Color.LIGHTGREEN);
 		playerHealthBar.setTranslateX(900);
 		playerHealthBar.setTranslateY(200);
 
-		enemyMaxLifeHealthBar = new Rectangle(100, 10, Color.TRANSPARENT);
+		// enemy health bar
+		enemyUsernameText = new Text(context.getEnemyState().getUsername());
+		enemyUsernameText.setX(900);
+		enemyUsernameText.setY(260);
+		enemyUsernameText.setFill(Color.GOLDENROD);
+		enemyUsernameText.setFont((Font.font(null, FontWeight.BOLD, 30)));
+
+		enemyMaxLifeHealthBar = new Rectangle(100, 30, Color.TRANSPARENT);
 		enemyMaxLifeHealthBar.setStroke(Color.GREY);
 		enemyMaxLifeHealthBar.setTranslateX(900);
-		enemyMaxLifeHealthBar.setTranslateY(240);
+		enemyMaxLifeHealthBar.setTranslateY(270);
 
-		enemyHealthBar = new Rectangle((double) 100 * ((double) context.getPlanet().getHealth() / (double) context.getPlanet().getMaxHealth()), 10, Color.LIGHTGREEN);
+		enemyHealthBar = new Rectangle((double) 100 * ((double) context.getPlanet().getHealth() / (double) context.getPlanet().getMaxHealth()), 30, Color.LIGHTGREEN);
 		enemyHealthBar.setTranslateX(900);
-		enemyHealthBar.setTranslateY(240);
+		enemyHealthBar.setTranslateY(270);
 	}
 
 	private void initText(){

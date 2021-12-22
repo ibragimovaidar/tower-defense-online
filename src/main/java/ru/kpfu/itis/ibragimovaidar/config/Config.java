@@ -18,10 +18,6 @@ public class Config {
 		gameEntities.add(PLANET);
 
 		SpaceshipFactory spaceshipFactory = new SpaceshipFactory();
-		gameEntities.add(spaceshipFactory.createSpaceship(SpaceshipFactory.SpaceshipType.TANK, 100, 200));
-		gameEntities.add(spaceshipFactory.createSpaceship(SpaceshipFactory.SpaceshipType.PUSHER, 100, 200));
-		gameEntities.add(spaceshipFactory.createSpaceship(SpaceshipFactory.SpaceshipType.PUSHER, 300, 200));
-		gameEntities.add(Tower.createInstance(300, 300));
 		return gameEntities;
 	};
 
